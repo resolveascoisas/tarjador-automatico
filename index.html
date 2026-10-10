@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tarjador — anonimização de PDFs</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo"><i></i><i></i><i></i></span><div><b>Tarjador</b><small>Anonimização de PDFs, 100% no navegador</small></div></div>
+  <div class="hr"><div id="status">Abra um PDF para começar.</div><small id="saved"></small></div>
+</header>
+<div id="warn" hidden>Abra este projeto por um servidor local (<code>iniciar.bat</code> / <code>iniciar.sh</code>); módulos JS não carregam via <code>file://</code>.</div>
+<div class="app">
+  <aside id="left">
+    <div class="phead"><span>Documento e filtros</span><button class="pcol" data-p="left" title="Minimizar / expandir">«</button></div>
+    <div class="pbody">
+    <section>
+      <h2><i>1</i>Documento<span class="sp"></span></h2>
+      <label class="file"><input type="file" id="pdfIn" accept="application/pdf"><span>Escolher PDF…</span></label>
+      <label class="lbl">Leitura do texto
+        <select id="ocrMode">
+          <option value="auto">Automática (OCR se faltar texto)</option>
+          <option value="never">Somente texto do PDF</option>
+          <option value="always">Sempre OCR</option>
+        </select>
+      </label>
+      <button type="button" class="lnk" id="clearMem" hidden>Apagar progresso salvo deste documento</button>
+    </section>
+    <section class="grow"><h2><i>2</i>O que tarjar<span class="sp"></span></h2><div id="cats"></div></section>
+    <section><button class="pri block" id="go">Analisar documento</button><progress id="prog" max="100" value="0" hidden></progress></section>
+    </div>
+  </aside>
+  <div class="split" data-s="l" title="Arraste para redimensionar · duplo clique minimiza"></div>
+
+  <main>
+    <div id="bar">
+      <div class="seg">
+        <button data-mode="toggle" class="on" title="Clique numa tarja para aplicar/rejeitar"><i class="ic tap"></i> Alternar</button>
+        <button data-mode="draw" title="Arraste sobre a página para criar uma tarja">▭ Desenhar</button>
+        <button data-mode="word" title="Clique numa palavra para tarjá-la">Aa Palavra</button>
+      </div>
+      <div class="seg" title="Efeito das tarjas manuais (modos Desenhar e Palavra)"><button data-fx="black" class="on">▮ Tarja</button><button data-fx="blur">◍ Borrar</button></div>
+      <label class="sw" title="Mostra as tarjas aplicadas em vermelho translúcido, com opção de aprovar ou remover"><input type="checkbox" id="reveal"><b></b>Ver o que foi tarjado</label>
+      <div class="grp"><button id="undo" title="Desfazer (Ctrl+Z)" disabled>↶</button><button id="redo" title="Refazer (Ctrl+Y)" disabled>↷</button></div>
+      <div class="grp">
+        <button id="zout" title="Diminuir">−</button><button id="zfit" title="Voltar ao ajuste"><span id="zoomv">100%</span></button><button id="zin" title="Aumentar">+</button>
+      </div>
+      <div class="grp">
+        <button data-fit="width" class="on" title="Ajustar à largura da área central">↔ Largura</button><button data-fit="page" title="Mostrar a página inteira">▯ Página</button>
+      </div>
+      <div class="grp"><button id="pprev" title="Página anterior">‹</button><span id="pgn">–</span><button id="pnext" title="Próxima página">›</button></div>
+    </div>
+    <div id="viewer"><div id="pages"><div class="empty">Escolha um PDF na coluna à esquerda.</div></div></div>
+  </main>
+
+  <div class="split" data-s="r" title="Arraste para redimensionar · duplo clique minimiza"></div>
+  <aside id="right">
+    <div class="phead"><span>Revisão</span><button class="pcol" data-p="right" title="Minimizar / expandir">»</button></div>
+    <div class="pbody">
+    <section class="grow">
+      <h2><i>3</i>Revisão <span id="stats"></span></h2>
+      <form id="sform" class="srch" autocomplete="off"><input id="sq" type="search" placeholder="Buscar e tarjar outro termo…" aria-label="Buscar termo no documento"><button type="submit" id="sgo" class="pri" title="Tarja todas as ocorrências do termo digitado (Enter)">Tarjar</button></form>
+      <label class="sopt"><input type="checkbox" id="scont"> também dentro de outras palavras</label>
+      <div class="row"><button id="accAll"><i class="ic like"></i> Aceitar dúvidas</button><button id="rejAll"><i class="ic trash"></i> Rejeitar dúvidas</button></div>
+      <div id="list"><p class="hint">As ocorrências aparecem aqui após a análise.</p></div>
+    </section>
+    <section><button class="pri block" id="exp">Exportar PDF tarjado</button></section>
+    </div>
+  </aside>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
