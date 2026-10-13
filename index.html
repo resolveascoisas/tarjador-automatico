@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tarjador — anonimização de PDFs</title>
+<title>Tarjador</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <header class="top">
-  <div class="brand"><span class="logo"><i></i><i></i><i></i></span><div><b>Tarjador</b><small>Anonimização de PDFs, 100% no navegador</small></div></div>
+  <div class="brand"><span class="logo"><i></i><i></i><i></i></span><div><b>Tarjador</b></div></div>
   <div class="hr"><div id="status">Abra um PDF para começar.</div><small id="saved"></small></div>
 </header>
 <div id="warn" hidden>Abra este projeto por um servidor local (<code>iniciar.bat</code> / <code>iniciar.sh</code>); módulos JS não carregam via <code>file://</code>.</div>
@@ -69,7 +69,16 @@
       <div class="row"><button id="accAll"><i class="ic like"></i> Aceitar dúvidas</button><button id="rejAll"><i class="ic trash"></i> Rejeitar dúvidas</button></div>
       <div id="list"><p class="hint">As ocorrências aparecem aqui após a análise.</p></div>
     </section>
-    <section><button class="pri block" id="exp">Exportar PDF tarjado</button></section>
+    <section>
+      <label class="lbl">Tamanho do arquivo
+        <select id="expQ">
+          <option value="alta">Alta qualidade (maior)</option>
+          <option value="eq" selected>Equilibrado</option>
+          <option value="min">Compacto (menor)</option>
+        </select>
+      </label>
+      <button class="pri block" id="exp">Exportar PDF tarjado</button>
+    </section>
     </div>
   </aside>
 </div>

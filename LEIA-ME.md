@@ -39,3 +39,6 @@ Tudo (tarjas aceitas/rejeitadas/manuais, palavras ignoradas, categorias, texto l
 
 ### Incluir reconhecimento de imagem
 Primeiro item do filtro, **desmarcado por padrão**. Ligado, passam a valer as opções do grupo “Reconhecimento de imagem (borrar)” (rostos, assinaturas, placas); desligado, o grupo fica apagado e nada de imagem é processado nem baixado. A escolha é salva por documento.
+
+## Tamanho do arquivo exportado
+Seletor “Tamanho do arquivo” acima do botão Exportar: **Alta** (3×, JPEG 90%), **Equilibrado** (2× ≈ 144 dpi, 75%, padrão) e **Compacto** (1,5×, 60%). A barra de status informa o tamanho final.

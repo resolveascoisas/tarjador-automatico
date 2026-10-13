@@ -94,4 +94,4 @@ document.querySelectorAll('[data-fit]').forEach(b => b.onclick = () => setFit(b.
 $('pprev').onclick = () => nav(-1); $('pnext').onclick = () => nav(1);
 $('viewer').addEventListener('scroll', pageLabel);
 new ResizeObserver(layout).observe($('viewer'));
-$('exp').onclick = () => state.pdf ? exportPdf(status) : status('Abra um PDF primeiro.');
+$('exp').onclick = () => state.pdf ? exportPdf(status, $('expQ').value) : status('Abra um PDF primeiro.');
